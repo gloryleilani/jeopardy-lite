@@ -5,7 +5,8 @@ const GameSmallSingleItem = props => {
 
     return (
         <div>
-            {props.points}
+            <p>small single</p>
+            {/* {props.points} */}
         </div>
     );
 }

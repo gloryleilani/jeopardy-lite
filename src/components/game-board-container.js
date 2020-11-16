@@ -10,28 +10,28 @@ const GameBoardContainer = props => {
             <div>
                 <table>
                     <tbody>
-                    <tr>
-                        <td>
-                            <GameBoardColumn />
-                        </td>
-                        <td>
-                            <GameBoardColumn />
-                        </td>
-                        <td>
-                            <GameBoardColumn />
-                        </td>
-                        <td>
-                            <GameBoardColumn />
-                        </td>
-                        <td>
-                            <GameBoardColumn />
-                        </td>
-                        <td>
-                            <GameBoardColumn />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        <tr>
+                            <td>
+                                <GameBoardColumn />
+                            </td>
+                            <td>
+                                <GameBoardColumn />
+                            </td>
+                            <td>
+                                <GameBoardColumn />
+                            </td>
+                            <td>
+                                <GameBoardColumn />
+                            </td>
+                            <td>
+                                <GameBoardColumn />
+                            </td>
+                            <td>
+                                <GameBoardColumn />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     )
