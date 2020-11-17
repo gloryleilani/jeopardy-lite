@@ -13,8 +13,6 @@ function App() {
   const [playerScore, setPlayerScore] = useState(0);
   const [questions, setQuestions] = useState(null);
   // roundTimer = 600; //Seconds, counting down
-
-  
   
   const playGame = () => {
     console.log("new view pre:", newView);
@@ -33,27 +31,29 @@ function App() {
       }
   }
 
+
+
+
+
   shuffle(questionList);
 
-  //Add correct answer to list of answer choices
-  const answerChoices = [];
-  for (const item of questionList) {
+  useEffect(() => {
+    //Add correct answer to list of answer choices
+    const answerChoices = [];
+    
+    for (const item of questionList) {
     const answerChoices = item.incorrect_answers;
     answerChoices.push(item.correct_answer);
-    //console.log("item:", item);
+    console.log("item:", item);
     //console.log("ans pre shuf:", answerChoices);
     shuffle(answerChoices);
     //console.log("ans post shuf:", answerChoices);
   }
-  
-  
+    setQuestions(questionList);
 
-  
+  }, []);
 
-
-
-  
-
+  console.log("questions state:", questions)
 
   return (
     
