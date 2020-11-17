@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import GameSmallSingleItem from './game-small-single-item';
+import SmallCategoryBox from './small-category-box';
+import GameSmallSingleItem from './small-point-box';
 
 
 const GameBoardColumn = props => {
@@ -7,6 +8,7 @@ const GameBoardColumn = props => {
     const [questionsInCategory, setQuestionsInCategory] = useState(null); 
     const categoryQuestionComponents= [];
 
+    const category = "category name";
     const showQuestion = () => {
         console.log("show question")
     };
@@ -25,11 +27,11 @@ const GameBoardColumn = props => {
         };
         setQuestionsInCategory(categoryQuestionComponents);
         console.log("state", questionsInCategory)
-    }, [questionsInCategory]);
+    }, []);
 
     return (
         <div>
-            hi
+            <SmallCategoryBox categoryName={category}/>
             {questionsInCategory}
         </div>
             

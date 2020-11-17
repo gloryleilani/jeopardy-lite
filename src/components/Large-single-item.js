@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const GameLargeSingleItem = props => {
+const LargeSingleItem = props => {
 
     return (
         <div>
@@ -10,4 +10,4 @@ const GameLargeSingleItem = props => {
     );
 }
 
-export default GameLargeSingleItem
+export default LargeSingleItem
