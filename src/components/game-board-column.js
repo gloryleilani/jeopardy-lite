@@ -8,18 +8,20 @@ const GameBoardColumn = props => {
     const [questionsInCategory, setQuestionsInCategory] = useState(null); 
     const categoryQuestionComponents= [];
 
-    const category = "category name";
+    
     const showQuestion = () => {
         console.log("show question")
     };
 
     useEffect(() => {
+        
+        //if round===1, factor=100, if round==2, factor == 200, if round==3, wager.
         for (let i=1; i<6; i++) {
             
-            console.log(i);
+            //console.log(i);
             const questionComponent = <GameSmallSingleItem
                                         key={i}
-                                        points={i}
+                                        points={i*100}
                                         handleClick={showQuestion} 
                                         />
 
@@ -31,7 +33,7 @@ const GameBoardColumn = props => {
 
     return (
         <div>
-            <SmallCategoryBox categoryName={category}/>
+            <SmallCategoryBox categoryName={props.category}/>
             {questionsInCategory}
         </div>
             
