@@ -36,8 +36,7 @@ const GameBoardContainer = props => {
     // if (round == 2) {
     //     categories = round2Categories;
     // }
-    console.log("round1 category i=0", round1Categories[0]);
-    console.log("game col components state:", gameBoardColumns);
+    
     useEffect(() => {
         
         for (let i=0; i<6; i++) {
@@ -59,7 +58,9 @@ const GameBoardContainer = props => {
                 <table>
                     <tbody>
                         <tr>
-                            {gameBoardColumns}
+                            {gameBoardColumns && gameBoardColumns.map((column) => (
+                                <td>{column}</td>
+                            ))}
                         </tr>
                     </tbody>
                 </table>
