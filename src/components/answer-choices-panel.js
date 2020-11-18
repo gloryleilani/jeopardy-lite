@@ -15,7 +15,6 @@ const AnswerChoicesPanel = props => {
     
     return (
         <div>
-            <p>Answerchoices</p>
             <p>{answerButtons}</p>
         </div>
     );

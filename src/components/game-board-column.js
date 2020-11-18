@@ -38,22 +38,18 @@ const GameBoardColumn = props => {
                 break;
             };
         };   
-          
     };
 
     const push = () => {
         history.push({
             pathname:`/question`,
-            questionObj: "selectedQues",
-            questionSt: selectedQuestion
+            questionObject: selectedQuestion
         }); 
     };
 
-    
     if (selectedQuestion !== null) {
-        push()
-        }
-   
+        push();
+    };
 
     useEffect(() => {
         //if round===1, factor=100, if round==2, factor == 200, if round==3, wager.
