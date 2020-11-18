@@ -14,8 +14,14 @@ const GameBoardColumn = props => {
     
     let seenQuestions = new Set()
     //console.log("props.questions", props.questions)
+
+    console.log("question item", selectedQuestion); 
+    const history = useHistory();
     
-    useEffect(() => {
+    const showQuestion = (e) => {
+        e.preventDefault();
+        //Push to LargeSingleItemContainer
+        
         for (let j in props.questions) {
             
             console.log("item in props.qs", props.questions[j]);
@@ -32,17 +38,22 @@ const GameBoardColumn = props => {
                 break;
             };
         };   
-    },[]);
-    console.log("question item", selectedQuestion); 
-    const history = useHistory();
+          
+    };
 
-    const showQuestion = () => {
-        
+    const push = () => {
         history.push({
             pathname:`/question`,
-            state: {questionObject: selectedQuestion}
-        });
+            questionObj: "selectedQues",
+            questionSt: selectedQuestion
+        }); 
     };
+
+    
+    if (selectedQuestion !== null) {
+        push()
+        }
+   
 
     useEffect(() => {
         //if round===1, factor=100, if round==2, factor == 200, if round==3, wager.

@@ -18,21 +18,23 @@ const LargeSingleItemContainer = props => {
     };
 
     const [showMultipleChoice, setShowMultipleChoice] = useState();
+    
+    //Pushed from GameBoardColumn
     let location = useLocation();
-    let questionObject = location.state.questionObject;
-    console.log("ques", location.state.question);
-    console.log("ques", location.state.question.question);
-    console.log("ques", location.state.question.answers);
+    console.log("quesOb", location.questionObj);
+    console.log("quesSt", location.questionSt);
 
     //Add correct answer to list of answer choices
-    const answerChoices = [];
+    let answerChoices = [];
     
     //for (const item of questionList) {
-    answerChoices = questionObject.incorrect_answers;
-    answerChoices.push(questionObject.correct_answer);
+    answerChoices = location.questionObj;
+    console.log("questionObject");
+    // answerChoices = questionObject.incorrect_answers;
+    // answerChoices.push(questionObject.correct_answer);
     //console.log("item:", item);
     //console.log("ans pre shuf:", answerChoices);
-    shuffle(answerChoices);
+    // shuffle(answerChoices);
     //console.log("ans post shuf:", answerChoices);
     //}
 
@@ -45,8 +47,8 @@ const LargeSingleItemContainer = props => {
     return (
         <div>
             <p>Hi</p>
-            <p>{location.state.question}</p>
-            {showMultipleChoice? <AnswerChoicesPanel questionObject={questionObject} /> : <MainButton label="Answer" handleClick={showAnswerChoices} />}
+            <p>{answerChoices}</p>
+            {showMultipleChoice? <AnswerChoicesPanel questionObject={answerChoices} /> : <MainButton label="Answer" handleClick={showAnswerChoices} />}
         </div>
     );
 }
