@@ -1,6 +1,6 @@
-import React from 'react';
-import MainButton from './main-button';
-import { useHistory } from 'react-router-dom';
+// import React from 'react';
+// import MainButton from './main-button';
+// import { useHistory } from 'react-router-dom';
 
 // const LandingPage = props => {
 
@@ -15,7 +15,7 @@ import { useHistory } from 'react-router-dom';
 //         <div> 
 //             <h1> Jeopardy Lite</h1>
 //             <p> Welcome! Would you like to play?</p> 
-//             <MainButton label="Play" play={play}/>
+//             <MainButton label="Play" handleClick={play}/>
 //         </div>
 //     )
 // }; 

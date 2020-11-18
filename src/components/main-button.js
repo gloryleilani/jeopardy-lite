@@ -7,7 +7,7 @@ const MainButton = props => {
         <button 
             type="submit" 
             className="main-button"
-            onClick={props.play}>
+            onClick={props.handleClick}>
             {props.label}
             
         </button>

@@ -9,6 +9,7 @@ import questionList from "./questions.json";
 import LargeSingleItemContainer from './components/large-single-item-container';
 import GameBoardColumn from "./components/game-board-column";
 import MainButton from "./components/main-button";
+import { prependOnceListener } from 'process';
 
 
 function App() {
@@ -28,7 +29,6 @@ function App() {
 
     //Function to shuffle questions in categories and also answer choices per question
     const shuffle = (lst) => {
-    
       for (let i= lst.length - 1; i>0; i --) {
         const j = Math.floor(Math.random() * i);
         const temp = lst[i];
@@ -41,17 +41,7 @@ function App() {
   shuffle(questionList);
 
   useEffect(() => {
-    //Add correct answer to list of answer choices
-    const answerChoices = [];
     
-    for (const item of questionList) {
-    const answerChoices = item.incorrect_answers;
-    answerChoices.push(item.correct_answer);
-    //console.log("item:", item);
-    //console.log("ans pre shuf:", answerChoices);
-    shuffle(answerChoices);
-    //console.log("ans post shuf:", answerChoices);
-  }
     setQuestions(questionList);
   }, []);
 
@@ -68,7 +58,7 @@ function App() {
 
       <Router>
         <Switch>
-          <Route path="/question/:question">
+          <Route path="/question">
             <LargeSingleItemContainer />
           </Route>
           {/* <Route path="/round" component={Round}></Route>*/}
@@ -87,23 +77,19 @@ function App() {
 const LandingPage = props => {
 
   const history = useHistory();
-  console.log("history:", history)
     
   const play = () => {
     history.push(`/game-board`);
-    console.log("history:", history)
   };
 
   return (
     <div> 
       <h1> Jeopardy Lite</h1>
       <p> Welcome! Would you like to play?</p> 
-      <MainButton label="Play" play={play}/>
+      <MainButton label="Play" handleClick={play}/>
     </div>
   )
 }; 
-
-//export default LandingPage
 
 export default App;
 
