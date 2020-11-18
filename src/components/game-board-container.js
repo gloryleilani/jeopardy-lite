@@ -23,10 +23,13 @@ const GameBoardContainer = props => {
     //Set the categories for this game
     const round1Categories = categoryArray.slice(0,6);
     const round2Categories = categoryArray.slice(6,12);
-    const categoryQuestions = ""
+    const round3Categories = categoryArray.slice(12,)
+    console.log("round3 Qs", round3Categories)
+    
+
+    
 
     const [gameBoardColumns, setGameBoardColumns] = useState(null);
-
     const gameBoardColumnComponents = [] 
     
     // const categories = null; 
@@ -37,6 +40,9 @@ const GameBoardContainer = props => {
     //     categories = round2Categories;
     // }
     
+    
+
+
     useEffect(() => {
         
         for (let i=0; i<6; i++) {
@@ -44,11 +50,13 @@ const GameBoardContainer = props => {
             const gameBoardComponent = <GameBoardColumn 
                                         key = {i} 
                                         category={round1Categories[i]} 
-                                        questions={categoryQuestions} 
+                                        questions={props.questions} 
                                         />
             gameBoardColumnComponents.push(gameBoardComponent);                                    
         }
+
         setGameBoardColumns(gameBoardColumnComponents);
+        console.log("column components state", gameBoardColumns)
     }, []);        
 
     return (

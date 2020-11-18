@@ -15,8 +15,10 @@
   color: white;
 }
 
+/*Width of box is percentage of column */ 
 .small-box {
   border-style: solid;
   text-align: center;
   margin-bottom: 2px;
+  width: 100%;
 }

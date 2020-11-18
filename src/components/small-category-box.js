@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SmallCategoryBox = props => {
-    console.log(props.categoryName);
+    //console.log(props.categoryName);
 
     return (
         <div className="small-box">

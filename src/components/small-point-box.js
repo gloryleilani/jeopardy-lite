@@ -1,14 +1,16 @@
 import React from 'react';
 
+//Child of GameBoardColumn
 const SmallPointBox = props => {
-    console.log(props.points);
+    
+    //console.log(props.points);
 
     return (
-        <div className="small-box">
-            
+        <button 
+            className="small-box"
+            onClick={props.handleClick}>        
             {props.points}
-            
-        </div>
+        </button>
     );
 }
 

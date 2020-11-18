@@ -3,10 +3,11 @@ import React from 'react';
 
 const LargeSingleItemContainer = props => {
 
-    return
+    return (
         <div>
-
+            <p>Hi</p>
         </div>
+    );
 }
 
 export default LargeSingleItemContainer

@@ -1,6 +1,8 @@
 // import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react';
+//import { Route, Switch } from 'react-router-dom';
+
 import LandingPage from "./components/landing-page";
 import GameBoardContainer from "./components/game-board-container";
 import questionList from "./questions.json";
