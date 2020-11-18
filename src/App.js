@@ -1,12 +1,14 @@
 // import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react';
-//import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router, useHistory } from 'react-router-dom';
 
-import LandingPage from "./components/landing-page";
+//import LandingPage from "./components/landing-page";
 import GameBoardContainer from "./components/game-board-container";
 import questionList from "./questions.json";
-import LargeSingleItemContainer from './components/Large-single-item-container';
+import LargeSingleItemContainer from './components/large-single-item-container';
+import GameBoardColumn from "./components/game-board-column";
+import MainButton from "./components/main-button";
 
 
 function App() {
@@ -56,14 +58,52 @@ function App() {
   //console.log("questions state:", questions);
   console.log("round:", round);
 
+
   return (
-    
-    <div className="App">
-      {newView? <LandingPage play={playGame} /> :
-      [round===3? <LargeSingleItemContainer /> : <GameBoardContainer questions={questions}/> ]}
-    </div>
+    <React.Fragment>
+      <div className="App">
+        {/* {newView? <LandingPage play={playGame} /> :
+        [round===3? <LargeSingleItemContainer /> : <GameBoardContainer questions={questions}/> ]} */}
+      </div>
+
+      <Router>
+        <Switch>
+          <Route path="/question/:question">
+            <LargeSingleItemContainer />
+          </Route>
+          {/* <Route path="/round" component={Round}></Route>*/}
+          <Route path="/game-board"> 
+            <GameBoardContainer questions={questions} />
+          </Route>
+          <Route path="/" component={LandingPage}></Route>  
+        </Switch>
+      </Router>
+
+    </React.Fragment>
   );
 }
 
+  
+const LandingPage = props => {
+
+  const history = useHistory();
+  console.log("history:", history)
+    
+  const play = () => {
+    history.push(`/game-board`);
+    console.log("history:", history)
+  };
+
+  return (
+    <div> 
+      <h1> Jeopardy Lite</h1>
+      <p> Welcome! Would you like to play?</p> 
+      <MainButton label="Play" play={play}/>
+    </div>
+  )
+}; 
+
+//export default LandingPage
 
 export default App;
+
