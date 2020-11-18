@@ -8,6 +8,7 @@ const SmallPointBox = props => {
     return (
         <button 
             className="small-box"
+            id={props.id}
             onClick={props.handleClick}>        
             {props.points}
         </button>

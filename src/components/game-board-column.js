@@ -9,6 +9,7 @@ const GameBoardColumn = props => {
 
     const [pointsInCategory, setPointsInCategory] = useState(null); 
     const [selectedQuestion, setSelectedQuestion] = useState(null);
+    const [disablePointBox, setDisablePointBox] = useState(false);
     const categoryPointComponents= [];
     
     
@@ -22,6 +23,11 @@ const GameBoardColumn = props => {
         e.preventDefault();
         //Push to LargeSingleItemContainer
         
+        console.log("disable", disablePointBox);
+        setDisablePointBox(true);
+        console.log("disable", disablePointBox);
+
+
         for (let j in props.questions) {
             
             console.log("item in props.qs", props.questions[j]);
@@ -40,7 +46,7 @@ const GameBoardColumn = props => {
         };   
     };
 
-    const push = () => {
+    const pushNextPg = () => {
         history.push({
             pathname:`/question`,
             questionObject: selectedQuestion
@@ -48,7 +54,7 @@ const GameBoardColumn = props => {
     };
 
     if (selectedQuestion !== null) {
-        push();
+        pushNextPg();
     };
 
     useEffect(() => {
@@ -57,6 +63,7 @@ const GameBoardColumn = props => {
             //console.log(i);
             const pointComponent = <SmallPointBox
                                         key={i}
+                                        id={i}
                                         points={i*100}
                                         handleClick={showQuestion} 
                                         />

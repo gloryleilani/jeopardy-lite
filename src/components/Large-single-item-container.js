@@ -46,7 +46,7 @@ const LargeSingleItemContainer = props => {
     return (
         <div>
             <p>{question}</p>
-            {showMultipleChoice? <AnswerChoicesPanel questionObject={answerChoices} /> : <MainButton label="Answer" handleClick={showAnswerChoices} />}
+            {showMultipleChoice? <AnswerChoicesPanel answers={answerChoices} correctAnswer={correctAnswerChoice} /> : <MainButton label="Answer" handleClick={showAnswerChoices} />}
         </div>
     );
 }

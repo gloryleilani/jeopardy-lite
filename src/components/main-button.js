@@ -5,9 +5,11 @@ const MainButton = props => {
 
     return (
         <button 
+            id={props.label}
             type="submit" 
             className="main-button"
-            onClick={props.handleClick}>
+            onClick={props.handleClick}
+            value={props.value}>
             {props.label}
             
         </button>
