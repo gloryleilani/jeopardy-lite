@@ -53,6 +53,7 @@ const LargeSingleItemContainer = props => {
             {showMultipleChoice? <AnswerChoicesPanel 
                                     answers={answerChoices} 
                                     correctAnswer={correctAnswerChoice} 
+                                    score={newScore}
                                     worth={points}/> 
                                 : <MainButton 
                                     label="Answer" 

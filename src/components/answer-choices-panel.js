@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainButton from './main-button';
 import { useHistory } from 'react-router-dom';
 
@@ -17,24 +17,28 @@ const AnswerChoicesPanel = props => {
         console.log("correct ans", props.correctAnswer);
         console.log("state:", selectedAnswer);
         console.log("new score increm right ans", newScore)
+        console.log("props.worth:", props.worth)
+        console.log("props.worth type:", typeof props.worth)
+        console.log("props.score:", props.score)
+        console.log("props.score type:", typeof props.score)
     };
 
-    if (selectedAnswer !== null) {
+    useEffect(()=> {
+    
+        if (selectedAnswer !== null) {
+            if (selectedAnswer === props.correctAnswer) {
+                console.log("Bingo");
+                setNewScore(props.score + parseInt(props.worth)); //Increment Player score
+            }
+            else {
+                console.log("Wrong answer");
+                setNewScore(props.score - parseInt(props.worth)); //Decrement Player score   
+            };
+        };
+    },[selectedAnswer]);
 
-        if (selectedAnswer === props.correctAnswer) {
-            console.log("Bingo");
-            setNewScore(props.score + props.worth); //Increment Player score
-            //Go back to prior screen
-            //Reset timer
-        }
-        else {
-            console.log("Wrong answer");
-            setNewScore(props.score - props.worth); //Decrement Player score   
-        }
-    };
 
     const pushNextPg = () => {
-
         history.push({
             pathname: `/game-board`,
             score: newScore
