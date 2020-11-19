@@ -1,7 +1,6 @@
-// import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import { Route, Switch, BrowserRouter as Router, useHistory } from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router, useHistory, useLocation } from 'react-router-dom';
 
 //import LandingPage from "./components/landing-page";
 import GameBoardContainer from "./components/game-board-container";
@@ -21,21 +20,26 @@ function App() {
   const [questionsRemaining, setQuestionsRemaining] = useState(true);
   // roundTimer = 600; //Seconds, counting down
   
+  //Pushed from AnswerChoicesPanel
+  // let location = useLocation();
+  // console.log("score increment", location.scoreIncrement);
+
   const playGame = () => {
     //console.log("new view pre:", newView);
     setNewView(false);
     //console.log("new view post:", newView);
     };
 
-    //Function to shuffle questions in categories and also answer choices per question
-    const shuffle = (lst) => {
-      for (let i= lst.length - 1; i>0; i --) {
-        const j = Math.floor(Math.random() * i);
-        const temp = lst[i];
-        lst[i] = lst[j];
-        lst[j] = temp;
-      };
-  };
+  
+  //Function to shuffle questions in categories and also answer choices per question
+  const shuffle = (lst) => {
+    for (let i= lst.length - 1; i>0; i --) {
+      const j = Math.floor(Math.random() * i);
+      const temp = lst[i];
+      lst[i] = lst[j];
+      lst[j] = temp;
+    };
+};
 
 
   shuffle(questionList);
@@ -47,6 +51,7 @@ function App() {
 
   //console.log("questions state:", questions);
   console.log("round:", round);
+  console.log("initial score:", playerScore);
 
 
   return (
@@ -59,13 +64,16 @@ function App() {
       <Router>
         <Switch>
           <Route path="/question">
-            <LargeSingleItemContainer />
+            <LargeSingleItemContainer score={playerScore}/>
           </Route>
           {/* <Route path="/round" component={Round}></Route>*/}
           <Route path="/game-board"> 
-            <GameBoardContainer questions={questions} />
+            <GameBoardContainer questions={questions} score={playerScore}/>
           </Route>
-          <Route path="/" component={LandingPage}></Route>  
+          <Route path="/"> 
+            {newView? <LandingPage />:<GameBoardContainer questions={questions} score={playerScore}/>}
+          </Route>  
+          
         </Switch>
       </Router>
 

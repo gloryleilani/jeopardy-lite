@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import GameBoardColumn from './game-board-column';
 
-//Child of App 
+//Child of App
 const GameBoardContainer = props => {
     
     const [gameBoardColumns, setGameBoardColumns] = useState(null);
     
-    let categories = new Set()
+    const location = useLocation();
+    const score = location.score;
+
+    console.log("score passed", score);
+
+    let categories = new Set();
     //console.log("props.questions:", props.questions)
     for (let item in props.questions) {
         categories.add(props.questions[item].category)
@@ -15,7 +21,7 @@ const GameBoardContainer = props => {
 
     //Convert set into array
     let categoryArray = Array.from(categories)
-    console.log("category array:", categoryArray)
+    //console.log("category array:", categoryArray)
 
     //Set categories for this game
     const round1Categories = categoryArray.slice(0,6);
@@ -37,6 +43,7 @@ const GameBoardContainer = props => {
                                         key = {i} 
                                         category={round1Categories[i]} 
                                         questions={props.questions} 
+                                        score={score}
                                         />
             gameBoardColumnComponents.push(gameBoardComponent);                                    
         };
@@ -47,6 +54,7 @@ const GameBoardContainer = props => {
     return (
         <div>
             <h1> Jeopardy Lite </h1>
+            <p>Score: {location.score}</p>
             <div>
                 <table>
                     <tbody>

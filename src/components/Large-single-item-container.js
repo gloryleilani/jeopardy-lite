@@ -18,27 +18,30 @@ const LargeSingleItemContainer = props => {
     };
 
     const [showMultipleChoice, setShowMultipleChoice] = useState(false);
-    
+    const newScore = props.score 
     //Pushed from GameBoardColumn
     let location = useLocation();
-    console.log("quesOb", location.questionObject);
-
+    //console.log("quesOb", location.questionObject);
+    console.log("score lg single item container:", props.score);
+    
+    const points = location.points;
+    console.log("points Q is worth:", points)
     //Add correct answer to list of answer choices
     const incorrectAnswerChoices = location.questionObject.incorrect_answers;
     const correctAnswerChoice = location.questionObject.correct_answer;
     const question = location.questionObject.question;
     let answerChoices = [];
     answerChoices = incorrectAnswerChoices;
-    console.log("answer choices before push", answerChoices);
+    //console.log("answer choices before push", answerChoices);
     answerChoices.push(correctAnswerChoice);
-    console.log("answer choices after push", answerChoices);
+    //console.log("answer choices after push", answerChoices);
     // console.log("ans pre shuf:", answerChoices);
     // shuffle(answerChoices);
     //console.log("ans post shuf:", answerChoices);
     //}
 
     const showAnswerChoices = (answerChoices) => {
-        console.log("howdy");
+        console.log("correct ans:", correctAnswerChoice);
 
         setShowMultipleChoice(true);
     }
@@ -46,7 +49,14 @@ const LargeSingleItemContainer = props => {
     return (
         <div>
             <p>{question}</p>
-            {showMultipleChoice? <AnswerChoicesPanel answers={answerChoices} correctAnswer={correctAnswerChoice} /> : <MainButton label="Answer" handleClick={showAnswerChoices} />}
+            <p>This question is worth: {location.points} points</p>
+            {showMultipleChoice? <AnswerChoicesPanel 
+                                    answers={answerChoices} 
+                                    correctAnswer={correctAnswerChoice} 
+                                    worth={points}/> 
+                                : <MainButton 
+                                    label="Answer" 
+                                    handleClick={showAnswerChoices} />}
         </div>
     );
 }

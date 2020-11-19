@@ -9,6 +9,7 @@ const GameBoardColumn = props => {
 
     const [pointsInCategory, setPointsInCategory] = useState(null); 
     const [selectedQuestion, setSelectedQuestion] = useState(null);
+    const [selectedPts, setSelectedPts] = useState(null);
     const [disablePointBox, setDisablePointBox] = useState(false);
     const categoryPointComponents= [];
     
@@ -16,25 +17,25 @@ const GameBoardColumn = props => {
     let seenQuestions = new Set()
     //console.log("props.questions", props.questions)
 
-    console.log("question item", selectedQuestion); 
+    //console.log("question item", selectedQuestion); 
     const history = useHistory();
     
-    const showQuestion = (e) => {
-        e.preventDefault();
+    const showQuestion = (points) => {
+        points.preventDefault();
         //Push to LargeSingleItemContainer
         
         console.log("disable", disablePointBox);
+        setSelectedPts(points.target.id);
+        //setSelectedPts(points.target.points);
         setDisablePointBox(true);
-        console.log("disable", disablePointBox);
-
 
         for (let j in props.questions) {
             
-            console.log("item in props.qs", props.questions[j]);
-            console.log("category in round1Qs", props.questions[j].category);
-            console.log("props.category", props.category);
-            console.log("question in props.q", props.questions[j].question);
-            console.log("seen doesn't have item", !seenQuestions.has(props.questions[j]));
+            //console.log("item in props.qs", props.questions[j]);
+            //console.log("category in round1Qs", props.questions[j].category);
+            //console.log("props.category", props.category);
+            //console.log("question in props.q", props.questions[j].question);
+            //console.log("seen doesn't have item", !seenQuestions.has(props.questions[j]));
             if (props.category === props.questions[j].category && !seenQuestions.has(props.questions[j])) {
                 setSelectedQuestion(props.questions[j]);
                 
@@ -43,17 +44,22 @@ const GameBoardColumn = props => {
                 console.log("seen doesn't have item", !seenQuestions.has(props.questions[j]));
                 break;
             };
+        
         };   
     };
 
     const pushNextPg = () => {
+        
         history.push({
             pathname:`/question`,
-            questionObject: selectedQuestion
+            questionObject: selectedQuestion,
+            points: selectedPts
         }); 
     };
 
     if (selectedQuestion !== null) {
+        console.log("disable", disablePointBox);
+        console.log("question pts", selectedPts);
         pushNextPg();
     };
 
@@ -65,7 +71,9 @@ const GameBoardColumn = props => {
                                         key={i}
                                         id={i}
                                         points={i*100}
+                                        value={selectedPts}
                                         handleClick={showQuestion} 
+                                        score={props.score}
                                         />
 
             categoryPointComponents.push(pointComponent); 
@@ -73,11 +81,11 @@ const GameBoardColumn = props => {
         setPointsInCategory(categoryPointComponents);
         
     }, []);
-    console.log("state", pointsInCategory)
+    //console.log("state", pointsInCategory)
 
     return (
         <div>
-            <SmallCategoryBox categoryName={props.category}/>
+            <SmallCategoryBox categoryName={props.category} />
             {pointsInCategory}           
         </div>
     );
