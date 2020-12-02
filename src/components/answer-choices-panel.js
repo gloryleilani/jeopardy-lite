@@ -15,6 +15,7 @@ const AnswerChoicesPanel = props => {
         setSelectedAnswer(answ.target.id);
         
         console.log("correct ans", props.correctAnswer);
+        console.log("seen in ans choice panel", props.seen);
         console.log("state:", selectedAnswer);
         console.log("new score increm right ans", newScore)
         console.log("props.worth:", props.worth)
@@ -41,7 +42,8 @@ const AnswerChoicesPanel = props => {
     const pushNextPg = () => {
         history.push({
             pathname: `/game-board`,
-            score: newScore
+            score: newScore,
+            seen: props.seen,
         }); 
     };
     

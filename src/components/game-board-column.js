@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, Route, BrowserRouter as Router } from 'react-router-dom';
+import { useHistory, Route, BrowserRouter as Router, useLocation } from 'react-router-dom';
 //import LargeSingleItemContainer from './Large-single-item-container';
 import SmallCategoryBox from './small-category-box';
 import SmallPointBox from './small-point-box';
@@ -10,56 +10,88 @@ const GameBoardColumn = props => {
     const [pointsInCategory, setPointsInCategory] = useState(null); 
     const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [selectedPts, setSelectedPts] = useState(null);
+    const [seenQs, setSeenQs] = useState(new Set());
     const [disablePointBox, setDisablePointBox] = useState(false);
     const categoryPointComponents= [];
     
     
-    let seenQuestions = new Set()
+    //let seenQuestions = new Set()
     //console.log("props.questions", props.questions)
 
     //console.log("question item", selectedQuestion); 
     const history = useHistory();
+    const location = useLocation();
+    let seen = location.seen;
+    console.log("seen passed to column", seen);
+    console.log("seen type", typeof seen);
+
     
-    const showQuestion = (points) => {
-        points.preventDefault();
-        //Push to LargeSingleItemContainer
+    useEffect(() => {
         
-        console.log("disable", disablePointBox);
+            setSeenQs(seen);
+        
+    }, [seen]);
+    console.log("seenQs after useeffect", seenQs);
+
+    const showQuestion = (points, seenQs) => {
+        points.preventDefault();
+        console.log("seenQ in showQuestion why", seenQs);
+        console.log("seen in showQuestion why", seen);
+        //Push to LargeSingleItemContainer
+        console.log("disable pre", disablePointBox);
         setSelectedPts(points.target.id);
         //setSelectedPts(points.target.points);
         setDisablePointBox(true);
-
+        
         for (let j in props.questions) {
-            
-            //console.log("item in props.qs", props.questions[j]);
+            console.log("j", j)
+            console.log("item in props.qs", props.questions[j]);
+            //console.log("not in seen before add", !seenQs.has(props.questions[j]));
+            console.log("seenQs before add", seenQs)
             //console.log("category in round1Qs", props.questions[j].category);
             //console.log("props.category", props.category);
             //console.log("question in props.q", props.questions[j].question);
             //console.log("seen doesn't have item", !seenQuestions.has(props.questions[j]));
-            if (props.category === props.questions[j].category && !seenQuestions.has(props.questions[j])) {
-                setSelectedQuestion(props.questions[j]);
+            if (seen === undefined) {
                 
-                seenQuestions.add(props.questions[j]);
-                console.log("seenQs", seenQuestions)
-                console.log("seen doesn't have item", !seenQuestions.has(props.questions[j]));
-                break;
+                if (props.category === props.questions[j].category) {
+                    setSelectedQuestion(props.questions[j]);
+                    setSeenQs(props.questions[j]);
+                    console.log("seenQs after add if seen was undefined", seenQs)
+                    //console.log("not in seen after add if seen was undefined", !seenQs.has(props.questions[j]));
+                    break;
+                };
+            }
+            else {
+                if (!seenQs.has(props.questions[j])) {
+                    if (props.category === props.questions[j].category) {
+                        setSelectedQuestion(props.questions[j]);
+                        const seenQuestions = seenQs;
+                        seenQuestions.add(props.questions[j]);
+                        setSeenQs(seenQuestions);
+                        console.log("seenQs after add", seenQs)
+                        console.log("not in seen after add", !seenQs.has(props.questions[j]));
+                        break;
+                    };
+                };
             };
-        
-        };   
+        };
     };
-
+    
     const pushNextPg = () => {
         
         history.push({
             pathname:`/question`,
             questionObject: selectedQuestion,
-            points: selectedPts
+            points: selectedPts,
+            disabledBox: disablePointBox,
+            seen: seenQs,
         }); 
     };
 
     if (selectedQuestion !== null) {
-        console.log("disable", disablePointBox);
-        console.log("question pts", selectedPts);
+        console.log("disable post", disablePointBox);
+        console.log("question pts post", selectedPts);
         pushNextPg();
     };
 
@@ -74,6 +106,7 @@ const GameBoardColumn = props => {
                                         value={selectedPts}
                                         handleClick={showQuestion} 
                                         score={props.score}
+                                        disabled={disablePointBox}
                                         />
 
             categoryPointComponents.push(pointComponent); 

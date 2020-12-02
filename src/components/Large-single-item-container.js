@@ -30,6 +30,9 @@ const LargeSingleItemContainer = props => {
     const incorrectAnswerChoices = location.questionObject.incorrect_answers;
     const correctAnswerChoice = location.questionObject.correct_answer;
     const question = location.questionObject.question;
+    const disabledBox = location.disabledBox;
+    const seen = location.seen;
+
     let answerChoices = [];
     answerChoices = incorrectAnswerChoices;
     //console.log("answer choices before push", answerChoices);
@@ -54,7 +57,10 @@ const LargeSingleItemContainer = props => {
                                     answers={answerChoices} 
                                     correctAnswer={correctAnswerChoice} 
                                     score={newScore}
-                                    worth={points}/> 
+                                    worth={points}
+                                    seen={seen}
+                                    disabled={disabledBox}
+                                    /> 
                                 : <MainButton 
                                     label="Answer" 
                                     handleClick={showAnswerChoices} />}

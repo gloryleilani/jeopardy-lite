@@ -9,6 +9,7 @@ const GameBoardContainer = props => {
     
     const location = useLocation();
     const score = location.score;
+    const seen = location.seen;
 
     console.log("score passed", score);
 
@@ -44,6 +45,7 @@ const GameBoardContainer = props => {
                                         category={round1Categories[i]} 
                                         questions={props.questions} 
                                         score={score}
+                                        seen={seen}
                                         />
             gameBoardColumnComponents.push(gameBoardComponent);                                    
         };

@@ -11,8 +11,11 @@ const SmallPointBox = props => {
             id={props.points}
             value={props.points}
             points={props.points}
-            onClick={props.handleClick}>        
+            onClick={props.handleClick} 
+            disabled={props.disabled}  
+            >     
             {props.points}
+            
         </button>
     );
 }
